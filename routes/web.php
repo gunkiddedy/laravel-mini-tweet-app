@@ -27,7 +27,8 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('tweets', TweetController::class)->only([
     'index',
-    'store'
+    'store',
+    'update'
 ])->middleware([
     'auth',
     'verified'
