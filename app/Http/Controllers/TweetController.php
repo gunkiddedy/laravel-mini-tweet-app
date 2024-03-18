@@ -15,7 +15,9 @@ class TweetController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Tweets/Index', []);
+        return Inertia::render('Tweets/Index', [
+            'tweets' => Tweet::with('user:id,name')->latest()->get(),
+        ]);
     }
 
     /**
