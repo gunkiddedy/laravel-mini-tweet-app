@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Tweet;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,15 @@ class TweetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        $request->user()->tweets()->create($validated);
+
+        return redirect(route('tweets.index'));
     }
 
     /**
