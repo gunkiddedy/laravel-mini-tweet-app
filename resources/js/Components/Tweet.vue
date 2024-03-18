@@ -1,4 +1,9 @@
 <script setup>
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+
+dayjs.extend(relativeTime)
+
 defineProps(["tweet"])
 </script>
 
@@ -23,7 +28,7 @@ defineProps(["tweet"])
         <div>
           <span class="text-gray-800">{{ tweet.user.name }}</span>
           <small class="ml-2 text-sm text-gray-600">{{
-            new Date(tweet.created_at).toLocaleString()
+            dayjs(tweet.created_at).fromNow()
           }}</small>
         </div>
       </div>
